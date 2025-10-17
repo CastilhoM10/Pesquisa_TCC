@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pesquisa TCC – Questionário</title>
+  <meta name="description" content="Questionário rápido para apoiar um TCC. Leva menos de 1 minuto.">
+  <meta name="theme-color" content="#1644A4" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Pesquisa TCC – Questionário">
+  <meta property="og:description" content="Participe deste questionário rápido para apoiar um TCC.">
+  <meta property="og:image" content="assets/og.jpg">
+  <meta property="og:type" content="website">
+  <style>
+    :root{
+      --bg:#0a1d46; --card:#0f234f; --ink:#eaf2ff; --muted:#b9c7e6;
+      --accent:#fece01; --ok:#22c55e; --no:#ef4444;
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial;
+      background: radial-gradient(1200px 800px at 10% -10%, #11317a 0%, transparent 60%),
+                  radial-gradient(900px 600px at 110% 20%, #1644a4 0%, transparent 60%), var(--bg);
+      color:var(--ink); min-height:100dvh; display:grid; place-items:center; padding:24px;}
+    .wrap{width:100%; max-width:780px}
+    header{display:flex; gap:12px; align-items:center; margin:0 0 12px}
+    .badge{font-size:12px; background:#11317a; padding:6px 10px; border-radius:999px; color:#dfe8ff; border:1px solid #274a9a55}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--card);
+      border:1px solid #ffffff14; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
+    .hero{padding:22px 22px 0; display:flex; align-items:flex-start; gap:14px;}
+    .hero h1{margin:0; font-size:24px; line-height:1.25}
+    .muted{color:var(--muted); font-size:14px}
+    .progress{height:6px; background:#ffffff10; margin:16px 22px 0; border-radius:999px; overflow:hidden;}
+    .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), #ffd95a)}
+    form{padding:18px 22px 22px; display:grid; gap:16px}
+    .row{display:grid; gap:8px}
+    label{font-weight:600; font-size:14px}
+    input, select{background:#0c1f49; border:1px solid #ffffff22; border-radius:12px; color:var(--ink);
+      padding:12px 14px; outline:none; font-size:15px; transition:border .2s, transform .05s;}
+    input:focus, select:focus{border-color:#88aaff}
+    .hint{font-size:12px; color:#a9b7d8}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:6px}
+    button{border:0; padding:12px 18px; border-radius:12px; cursor:pointer; font-weight:700;
+      transition:transform .06s ease, filter .2s ease; will-change:transform;}
+    button:active{transform:translateY(1px) scale(.99)}
+    .btn-primary{background:var(--accent)}
+    .btn-ghost{background:#ffffff10; color:#e9f0ff}
+    .stage{display:none}
+    .stage.active{display:block; animation:fade .2s ease}
+    @keyframes fade{from{opacity:.0; transform:translateY(6px)} to{opacity:1; transform:none}}
+    .divider{height:1px; background:#ffffff14; margin:6px 0}
+    .footer{padding:14px 22px 22px; display:flex; justify-content:space-between; align-items:center; gap:10px; color:#fff; font-size:12px;}
+    .final{display:none; padding:28px; text-align:center;}
+    .final.show{display:block; animation:fade .25s ease}
+    .final h2{font-size:28px; margin:0 0 10px}
+    .whats{display:inline-flex; gap:10px; align-items:center; background:var(--ok); color:#072b12;
+      padding:12px 16px; border-radius:12px; font-weight:700; text-decoration:none; margin-top:10px;}
+    .btn-no{background:var(--no); color:#fff; position:relative; z-index:2;}
+    .no-wrapper{position:relative; display:inline-block; min-width:110px; height:46px}
+    .no-floater{position:absolute; inset:auto auto 0 0; transform:translate(0,0); transition:transform .15s ease-out;}
+    @media (max-width:520px){
+      .hero{flex-direction:column;}
+      .actions{justify-content:space-between}
+      .no-wrapper{width:46%}
+    }
+    .tip{font-size:12px; color:#bcd0ff; text-align:center; padding:0 22px 8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><span class="badge">Pesquisa Acadêmica • TCC</span></header>
+    <div class="card" id="card">
+      <div class="hero"><div><h1>Questionário de apoio ao TCC</h1><p class="muted">Sua participação é super importante. Leva menos de 1 minuto.</p></div></div>
+      <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      <form id="form" autocomplete="on" novalidate>
+        <!-- 1: Identificação -->
+        <section class="stage active" data-stage="1">
+          <div class="row"><label for="nome">Seu nome completo</label><input id="nome" name="nome" required placeholder="Ex.: Maria Santos" /><div class="hint">Pesquisa para fins acadêmicos...</div></div>
+          <div class="row"><label for="idade">Faixa etária</label>
+            <select id="idade" name="idade" required>
+              <option value="" selected disabled>Selecione</option><option>18-20</option><option>21-25</option><option>26-30</option><option>31-35</option><option>36+</option>
+            </select>
+          </div>
+          <div class="actions"><button type="button" class="btn-primary" data-next>Continuar</button></div>
+        </section>
+        <!-- 2: TCC (sem textarea) -->
+        <section class="stage" data-stage="2">
+          <div class="row"><label for="habito">Você já ouviu falar da Inteligência Artificial?</label>
+            <select id="habito" name="habito" required>
+              <option value="" selected disabled>Selecione</option><option>Sim</option><option>Não</option>
+            </select>
+          </div>
+          <div class="row"><label for="relevancia">Qual inteligência artificial você já utilizou?</label>
+            <select id="relevancia" name="relevancia" required>
+              <option value="" selected disabled>Selecione</option><option>ChatGPT</option><option>Gemini</option><option>Copilot</option><option>Outras</option>
+            </select>
+          </div>
+          <div class="actions"><button type="button" class="btn-ghost" data-prev>Voltar</button><button type="button" class="btn-primary" data-next>Próximo</button></div>
+        </section>
+        <!-- 3: IA/Twins -->
+        <section class="stage" data-stage="3">
+          <div class="row"><label for="ia_confia">Você confiaria em uma IA para auxiliar em diagnósticos médicos?</label>
+            <select id="ia_confia" name="ia_confia" required>
+              <option value="" selected disabled>Selecione</option><option>Sim, sem problemas</option><option>Sim, mas apenas como apoio ao médico</option><option>Não, só humanos</option>
+            </select>
+          </div>
+          <div class="row"><label for="twins_saude">Você gostaria de conhecer mais sobre os Gêmeos Digitais?</label>
+            <select id="twins_saude" name="twins_saude" required>
+              <option value="" selected disabled>Selecione</option><option>Sim</option><option>Talvez</option><option>Não</option>
+            </select>
+          </div>
+          <div class="actions"><button type="button" class="btn-ghost" data-prev>Voltar</button><button type="button" class="btn-primary" data-next>Próximo</button></div>
+        </section>
+        <!-- 4: Transição pro convite -->
+        <section class="stage" data-stage="4">
+          <div class="row"><label for="conexoes">Conexões humanas ainda são mais fortes que as digitais?</label>
+            <select id="conexoes" name="conexoes" required>
+              <option value="" selected disabled>Selecione</option><option>Com certeza</option><option>Depende da pessoa</option><option>A digital às vezes ganha</option>
+            </select>
+          </div>
+          <div class="row"><label for="experimento">Topa um “experimento social” pra testar essa teoria?</label>
+            <select id="experimento" name="experimento" required>
+              <option value="" selected disabled>Selecione</option><option>Topo fácil</option><option>Depende do pesquisador</option><option>Só se for científico</option>
+            </select>
+          </div>
+          <div class="actions"><button type="button" class="btn-ghost" data-prev>Voltar</button><button type="button" class="btn-primary" data-next>Próximo</button></div>
+        </section>
+        <!-- 5: Rolê -->
+        <section class="stage" data-stage="5">
+          <div class="row"><label for="role_agora">Se pudesse escolher um rolê agora, você iria de:</label>
+            <select id="role_agora" name="role_agora" required>
+              <option value="" selected disabled>Selecione</option><option>Pizza & papo tranquilo</option><option>Cinema</option><option>Café</option><option>Jantar</option>
+            </select>
+          </div>
+          <div class="row"><label for="estilo_encontro">Qual estilo de encontro você prefere?</label>
+            <select id="estilo_encontro" name="estilo_encontro" required>
+              <option value="" selected disabled>Selecione</option><option>Descontraído (barzinho, lanchonete)</option><option>Tranquilo (café, parque)</option><option>Planejado (jantar, cinema)</option><option>Surpresa</option>
+            </select>
+          </div>
+          <div class="actions"><button type="button" class="btn-ghost" data-prev>Voltar</button><button type="button" class="btn-primary" data-next>Avançar</button></div>
+        </section>
+        <!-- 6: Final -->
+        <section class="stage" data-stage="6">
+          <p class="tip">Pergunta final do TCC (importantíssima) — responda com sinceridade científica 😌</p>
+          <label for="estilo_encontro">Você aceita sair comigo esse final de semana?</label>
+          <div class="actions" id="final-ask">
+            
+            <button type="button" class="btn-primary" id="yes">Sim, bora! 💛</button>
+            <span class="no-wrapper" aria-live="polite"><span class="no-floater"><button type="button" class="btn-no" id="no" aria-label="Não">Não 😅</button></span></span>
+          </div>
+          <div class="divider"></div>
+          <div class="muted" style="padding:0 22px 6px">Obs.: Se o botão “Não” fugir, é o método científico agindo.</div>
+          <div class="actions" style="justify-content:flex-end"><button type="button" class="btn-ghost" data-prev>Voltar</button></div>
+        </section>
+      </form>
+      <div class="final" id="finalScreen" role="status" aria-live="polite">
+        <h2>Perfeito! 🎉</h2>
+        <p class="muted">Obrigado por participar da pesquisa (e aceitar o convite 😌).</p>
+        <p>Me chama no Whats pra combinarmos os detalhes:</p>
+        <a id="whats" class="whats" href="#" target="_blank" rel="noopener">Abrir no WhatsApp</a>
+      </div>
+      <div class="footer"><span>© 2025 • Projeto de TCC</span><span id="progTxt">Progresso: 0%</span></div>
+    </div>
+  </div>
+  <script>
+    const PHONE = '5519991919920'; // 55 + DDD + número
+    const totalStages = 6;
+    const bar = document.getElementById('bar');
+    const form = document.getElementById('form');
+    const finalScreen = document.getElementById('finalScreen');
+    const progTxt = document.getElementById('progTxt');
+
+    function setStage(n){
+      document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`.stage[data-stage="${n}"]`);
+      if(target){ target.classList.add('active'); }
+      const pct = Math.round(((n-1)/(totalStages))*100);
+      bar.style.width = pct+'%';
+      progTxt.textContent = `Progresso: ${pct}%`;
+    }
+
+    form.addEventListener('click', (e)=>{
+      const btnNext = e.target.closest('[data-next]');
+      const btnPrev = e.target.closest('[data-prev]');
+      if(btnNext){
+        const current = Number(document.querySelector('.stage.active')?.dataset.stage || 1);
+        const invalid = [...document.querySelectorAll(`.stage[data-stage="${current}"] [required]`)]
+          .some(el => !el.value || (el.tagName==='SELECT' && el.value===""));
+        if(invalid){ flash(inputsOfStage(current)); return; }
+        setStage(Math.min(current+1,totalStages));
+      }
+      if(btnPrev){
+        const current = Number(document.querySelector('.stage.active')?.dataset.stage || 1);
+        setStage(Math.max(current-1,1));
+      }
+    });
+
+    function inputsOfStage(n){
+      return document.querySelectorAll(`.stage[data-stage="${n}"] input, .stage[data-stage="${n}"] select`);
+    }
+    function flash(nodes){
+      nodes.forEach(el=>{ el.style.borderColor = '#ff8080'; setTimeout(()=> el.style.borderColor = '', 500); });
+    }
+
+    // Botão NÃO que foge
+    const noBtn = document.getElementById('no');
+    const noFloater = document.querySelector('.no-floater');
+    const noWrapper = document.querySelector('.no-wrapper');
+    let dodgeCount = 0;
+    function randomInside(maxX, maxY){
+      const x = Math.max(0, Math.min(maxX - 110, Math.random()*(maxX-110)));
+      const y = Math.max(0, Math.min(maxY - 46, Math.random()*(maxY-46)));
+      return `translate(${x}px,${-y}px)`;
+    }
+    function dodge(){
+      const bounds = noWrapper.getBoundingClientRect();
+      const maxX = Math.max(120, bounds.width);
+      const maxY = Math.max(60, bounds.height + 160);
+      noFloater.style.transform = randomInside(maxX, maxY);
+      dodgeCount++;
+      if(dodgeCount % 5 === 0){
+        const scale = Math.max(0.7, 1 - dodgeCount*0.02);
+        noFloater.style.transition = 'transform .15s ease-out';
+        noFloater.style.transform += ` scale(${scale})`;
+      }
+    }
+    noBtn?.addEventListener('mouseenter', dodge);
+    noBtn?.addEventListener('pointerdown', (e)=>{ e.preventDefault(); dodge(); });
+    noWrapper?.addEventListener('touchstart', ()=>{ dodge(); }, {passive:true});
+
+    // SIM -> confete + Whats
+    const yesBtn = document.getElementById('yes');
+    yesBtn.addEventListener('click', ()=>{
+      const nome = (document.getElementById('nome').value || 'você').trim();
+      form.style.display='none';
+      finalScreen.classList.add('show');
+      bar.style.width='100%'; progTxt.textContent = 'Progresso: 100%';
+      confetti(220);
+      const msg = encodeURIComponent(`Oi ${nome}! 😄 Aqui é o “Matheus”... adorei sua resposta “SIM”. Me chama no whats logo....`);
+      const link = `https://wa.me/${PHONE}?text=${msg}`;
+      const a = document.getElementById('whats');
+      a.href = link;
+      a.textContent = 'Chamar no WhatsApp';
+    });
+
+    function confetti(count=180){
+      const c = document.createElement('canvas');
+      c.width = innerWidth; c.height = innerHeight;
+      Object.assign(c.style,{position:'fixed', inset:'0', zIndex:9999, pointerEvents:'none'});
+      document.body.appendChild(c);
+      const ctx = c.getContext('2d');
+      const parts = Array.from({length:count}).map(()=>({
+        x: Math.random()*c.width, y: -20 - Math.random()*c.height*0.3, r: 4+Math.random()*6,
+        vx: (Math.random()-.5)*2, vy: 2+Math.random()*3, a: Math.random()*Math.PI*2, va: (Math.random()-.5)*0.2
+      }));
+      let t=0, maxT=220;
+      (function tick(){
+        ctx.clearRect(0,0,c.width,c.height);
+        parts.forEach(p=>{ p.a += p.va; p.x += p.vx + Math.sin((t+p.a)*0.03); p.y += p.vy;
+          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a);
+          ctx.fillStyle = ['#fece01','#22c55e','#60a5fa','#f472b6','#f59e0b','#a78bfa'][Math.floor(Math.random()*6)];
+          ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.2);
+          ctx.restore(); });
+        t++; if(t<maxT) requestAnimationFrame(tick); else c.remove();
+      })();
+      addEventListener('resize', ()=>{ c.width=innerWidth; c.height=innerHeight; }, {once:true});
+    }
+    setStage(1);
+  </script>
+</body>
+</html>
